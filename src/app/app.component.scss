@@ -1,0 +1,20 @@
+#cardArea {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly
+    ;
+    
+}
+
+.card {
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-size: 48px;
+    color: #FFF;
+    line-height: 10px;
+    border: 1px black solid;
+    background: black;
+}
