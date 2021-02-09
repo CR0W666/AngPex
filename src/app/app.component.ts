@@ -73,7 +73,6 @@ export class AppComponent {
   //-------------------- LOGIC -----------------------
 
   async selected(card: Card) {
-    console.log(card);
     this.flips++;
     if(!this.hasBeenFound(card)) {
       
@@ -104,7 +103,6 @@ export class AppComponent {
   }
 
   how() {
-    console.log("how???");
     if(this.flippedCards.length > 1) {
       if(this.flippedCards[2] != undefined) {
         this.flippedCards[2].flipped = false;
@@ -132,9 +130,7 @@ export class AppComponent {
   }
 
   async hide(delay: boolean, delayTime: number) {
-    console.log("hiding");
     if(delay) { await this.delay(delayTime); }
-    console.log(this.flippedCards);
     if(this.flippedCards[0] != undefined) this.flippedCards[0].flipped = false;
     if(this.flippedCards[1] != undefined) this.flippedCards[1].flipped = false;
   }
