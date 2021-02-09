@@ -3,7 +3,7 @@
         <p>Custom number of cards: (confirm with enter)</p>
         <input #box  type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' (keyup.enter)="startGame(box.value)">
         <p>Current: {{difficulty}} pairs of cards</p>
-        <p>Card Flips: {{flips}}</p>
+        <p>Card Flips: {{flips}}  (best is: {{difficulty*2}})</p>
         <p>Found Pairs: {{foundPairs.length/2}}</p>
         <p>Remaining Pairs: {{difficulty - (foundPairs.length/2)}}</p>
     </div>
