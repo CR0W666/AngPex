@@ -1,12 +1,20 @@
 <body>
+    <div id="info">
+        <p>Custom number of cards: (confirm with enter)</p>
+        <input #box  type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' (keyup.enter)="startGame(box.value)">
+        <p>Current: {{difficulty}} pairs of cards</p>
+        <p>Card Flips: {{flips}}</p>
+        <p>Found Pairs: {{foundPairs.length/2}}</p>
+        <p>Remaining Pairs: {{difficulty - (foundPairs.length/2)}}</p>
+    </div>
 
-    <p>Custom number of cards: (confirm with enter)</p>
-    <input #box  type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' (keyup.enter)="startGame(box.value)">
-    <p>Current: {{difficulty}} pairs of cards</p>
 
-    <div id="cardArea">
-        <div class="card" *ngFor="let card of cards">
-            <p>{{card.icon+1}}</p>
+
+    <h1 *ngIf="won" id="won">YOU HAVE WON</h1>
+    <div id="cardArea" *ngIf="!won">
+        <div class="card" *ngFor="let card of cards" (click)="selected(card)">
+            <div class="pairedCard" *ngIf="card.paired" >{{card.icon+1}}</div>
+            <p class="cardSymbol" *ngIf="card.flipped">{{card.icon+1}}</p>
         </div>
     </div>
 

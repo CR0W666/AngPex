@@ -7,6 +7,28 @@
     
 }
 
+#won {
+
+
+}
+
+#info {
+
+
+
+}
+
+.pairedCard {
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-size: 48px;
+    color: #FFF;
+    line-height: 10px;
+    border: 1px black solid;
+    background: orange;
+}
 .card {
     margin: 10px;
     width: 100px;
@@ -18,3 +40,8 @@
     border: 1px black solid;
     background: black;
 }
+
+.cardSymbol {
+    visibility: shown;
+}
+
