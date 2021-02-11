@@ -22,6 +22,7 @@ export class AppComponent {
 
   adminpanel
   change icon from number to something
+  better css
 
   */
 
