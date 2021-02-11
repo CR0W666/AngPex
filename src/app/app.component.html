@@ -1,22 +1,49 @@
 <body>
-    <div id="info">
-        <p>Custom number of cards: (confirm with enter)</p>
-        <input #box  type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' (keyup.enter)="startGame(box.value)">
-        <p>Current: {{difficulty}} pairs of cards</p>
-        <p>Card Flips: {{flips}}  (best is: {{difficulty*2}})</p>
-        <p>Found Pairs: {{foundPairs.length/2}}</p>
-        <p>Remaining Pairs: {{difficulty - (foundPairs.length/2)}}</p>
-    </div>
+    <div id="bigDiv">
 
-
-
-    <h1 *ngIf="won" id="won">YOU HAVE WON</h1>
-    <div id="cardArea" *ngIf="!won">
-        <div class="card" *ngFor="let card of cards" (click)="selected(card)">
-            <div class="pairedCard" *ngIf="card.paired" >{{card.icon+1}}</div>
-            <p class="cardSymbol" *ngIf="card.flipped">{{card.icon+1}}</p>
+        <div id="info">
+            <p>Custom number of cards: (confirm with enter)</p>
+            <input #box  type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' (keyup.enter)="startGame(box.value)">
+            <p>Current: {{difficulty}} pairs of cards</p>
+            <p>Card Flips: {{flips}}  (best is: {{difficulty*2}})</p>
+            <p>Found Pairs: {{foundPairs.length/2}}</p>
+            <p>Remaining Pairs: {{difficulty - (foundPairs.length/2)}}</p>
         </div>
+    
+    
+        <div id="gaem">
+            <h1 *ngIf="won" id="won">YOU HAVE WON</h1>
+            <div id="cardArea" *ngIf="!won">
+                <div class="card" *ngFor="let card of cards" (click)="selected(card)">
+                    <div class="pairedCard" *ngIf="card.paired" >{{card.icon+1}}</div>
+                    <p class="cardSymbol" *ngIf="card.flipped || card.debug">{{card.icon+1}}</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="admin-sheiss">
+            <div *ngIf="!admin">
+                <p>admin password</p>
+                <input #password  type="text" (keyup.enter)="login(password.value)" >
+            </div>
+
+            <div id="hidden_options" *ngIf="admin">
+                    <button class="bttn" id="symbols_bttn" (click)="allSymbols()">Show/Hide Symbols</button>
+                    <button class="bttn" id="fakewin_bttn" (click)="fakeWin()">Fake Win</button>
+                    <button class="bttn" id="unwin_bttn"   (click)="unWin()">unWin??</button>
+                    <button class="bttn" id="highlight_bttn" (click)="highlightNext()">Highlight Next</button>
+                    <button class="bttn" id="highlight_one_bttn" (click)="highlightOne()">Highlight One</button>
+                    <button class="bttn" id="solve_bttn"   (click)="solve()">Solve</button>
+                    <button class="bttn" id="admin_logoff" (click)="logoff()">Log Off</button>
+                   
+                    
+            </div>
+        </div>
+
+
+
+
     </div>
-
-
 </body>

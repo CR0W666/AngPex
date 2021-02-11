@@ -5,6 +5,8 @@ interface Card{
   paired: boolean;
   icon: string;
   flipped: boolean;
+  debug: boolean;
+  highlighted: boolean;
 }
 
 @Component({
@@ -15,16 +17,27 @@ interface Card{
 
 export class AppComponent {
 
+  /*
+  TODO:
+
+  adminpanel
+  change icon from number to something
+
+  */
+
   //-------------------- VARIABLES -----------------------
 
   title = 'AngPex';
-  difficulty = 5; // # of pairs
+  difficulty = 0; // # of pairs
   cards: Card[] = []; //array of cards
   flippedCards: Card[] = [];
   foundPairs: Card[] = [];
   won: boolean = false;
   flips: number = 0;
-
+  admin: boolean = false;
+  password: string = "";
+  currentHighlitedNum: number = 0;
+  currentHighlitedNum2: number = 0;
 
   //-------------------- MAIN -----------------------
 
@@ -48,6 +61,8 @@ export class AppComponent {
     this.foundPairs = [];
     this.won = false;
     this.flips = 0;
+    this.currentHighlitedNum = 0;
+    this.currentHighlitedNum2 = 0;
   }
 
   fillArrayWithCards() { //fills the card array with cards
@@ -61,7 +76,7 @@ export class AppComponent {
   }
 
   createCard(icon: string) { //returns card with specified icon
-    let newCard: Card = {paired: false, icon: icon, flipped: false}; 
+    let newCard: Card = {paired: false, icon: icon, flipped: false, debug: false, highlighted: false}; 
     return newCard;
   }
 
@@ -121,13 +136,9 @@ export class AppComponent {
 
   async hide(delay: boolean, delayTime: number) {  //hides the selected cards  (after waiting a little bit)
     if(delay) { await this.delay(delayTime); }
-
     for(let i = 0; i < 2; i++) {
       if(this.flippedCards[i] != undefined) this.flippedCards[i].flipped = false;
     }
-
-    // if(this.flippedCards[0] != undefined) this.flippedCards[0].flipped = false;
-    // if(this.flippedCards[1] != undefined) this.flippedCards[1].flipped = false;
   }
 
 
@@ -147,4 +158,100 @@ export class AppComponent {
     this.flippedCards = []; //empties the array of selected cards
   }
 
+
+
+
+
+
+//--------------------- DEBUG ------------------------
+// just some shit for debugging or 4 shits and giggles
+log(something) { //logs sumn
+  console.log(something);
 }
+
+login(pass) { //logs in as admin
+
+    if(this.checkPass(pass)) {
+      this.admin = true;
+    } else {
+      throw new Error("You are not an admin bro.");
+    }
+
+}
+
+checkPass(pass) { //checks password
+  return pass == this.password;
+}
+
+logoff() {  //leaves admin status
+  this.admin = false;
+}
+
+fakeWin() {
+  this.won = true;
+}
+
+unWin() {
+  this.won = false;
+}
+
+solve() {
+
+}
+
+highlightOne() {  // works somehow?
+
+  // if(this.currentHighlitedNum2 == this.difficulty*2) {
+  //   this.currentHighlitedNum2 = 0;
+  //   return null;
+  // }
+  for(let card of this.cards) {
+    card.highlighted = false;
+  }
+  
+  this.log(this.currentHighlitedNum2);
+  let x = this.currentHighlitedNum2;
+  const currentSymbol = this.cards[x].icon;
+  this.log(currentSymbol);
+  for (let i = 0; i < this.cards.length; i++) {
+    const symbol = this.cards[i].icon;
+    
+    if(symbol == currentSymbol) {
+      this.log("match");
+      this.log(this.cards[i]);
+      this.cards[i].flipped = true;
+      this.currentHighlitedNum2++;
+      this.highlightOne();
+    }
+    
+  }
+  
+}
+
+
+highlightNext() { // starts from the index of first card // must change to zero
+ 
+  let x = this.currentHighlitedNum;
+  const currentSymbol = this.cards[x].icon;
+  
+  for (let i = 0; i < this.cards.length; i++) {
+    const symbol = this.cards[i].icon;
+    
+    if(symbol == currentSymbol) {
+      this.cards[i].flipped = true;
+      this.currentHighlitedNum++;
+    }
+  }
+}
+
+allSymbols() {  //shows symbols of all cards
+  for(let card of this.cards) {
+    card.debug = !card.debug;
+  }
+}
+
+}
+
+
+
+
